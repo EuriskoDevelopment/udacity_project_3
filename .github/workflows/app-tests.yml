@@ -1,0 +1,41 @@
+name: App tests
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: "3.10"
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install flake8
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - name: Analyzing the code with flake8
+      run: |
+        # stop the build if there are Python syntax errors or undefined names
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+    - name: Aws credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        # TODO(roberi): Check https://github.com/marketplace/actions/configure-aws-credentials-action-for-github-actions
+        aws-access-key-id: AKIATZFWYYDCQMNIIMFK
+        aws-secret-access-key: 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
+        aws-session-token: FwoGZXIvYXdzEN3//////////wEaDIaSeLSCIhUoO4gIRyK7ATI4nCccUq97wjHDNAT2wApMh7xvdUhk9dKpZlk8lQTSckcugqUe7KhOt8fkbl9JMoPXfhRutF2VFAn8Hr+IfuENdxdPPKnjMSpOiGxEtaWd8/YIqYxK7kfh++WkT6vMxkwNpMXslKF9cAXgGI4BJ1a6iVFMDFGw2rm1wmozjclnKYpDgfi61Gv+8RPsl89b4F2PRqQ227AbSKEBGMNPPWA5vbUi144XgbbLLF8u8/BU4Ud+TPE5ZfCAMIYousytjgYyLShEpdxQHsug7LrNoS2plDmDN9hWqK9KBRCTbOtut4RtriaXBhFPJwmyN4TkMQ==
+        aws-region: eu-north-1
+    - name: Setup DVC
+      uses: iterative/setup-dvc@v1
+    - name: Pull data from DVC
+      run: |
+        dvc remote add -d s3-bucket s3://ml-heroku-fastapi-bucket
+        dvc pull
