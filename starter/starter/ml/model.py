@@ -22,15 +22,15 @@ def train_model(X_train, y_train):
     model
         Trained machine learning model.
     """
-    rf_config = {"n_estimators": 101,
-                "max_depth": 10,
-                "min_samples_split": 4,
-                "min_samples_leaf": 3,
-                "n_jobs": -1,
-                "criterion": "mae",
-                "max_features": 0.5,
-                "oob_score": True}
-    rf_pipe = RandomForestRegressor(rf_config)
+    #rf_config = {"n_estimators": 101,
+    #            "max_depth": 10,
+    #            "min_samples_split": 4,
+    #            "min_samples_leaf": 3,
+    #            "n_jobs": -1,
+    #            "criterion": "mae",
+    #            "max_features": 0.5,
+    #            "oob_score": True}
+    rf_pipe = RandomForestRegressor()
     logger.info("Fitting")
     rf_pipe.fit(X_train,y_train)
 
@@ -73,4 +73,5 @@ def inference(model, X):
     preds : np.array
         Predictions from the model.
     """
-    pass
+    preds = model.predict(X)
+    return preds

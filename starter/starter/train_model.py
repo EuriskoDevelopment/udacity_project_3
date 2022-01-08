@@ -1,11 +1,11 @@
 # Script to train machine learning model.
 import os
 import pandas as pd
-from utils import ROOT_DIR
+from starter.utils import ROOT_DIR
 import pickle
 import logging
 from sklearn.model_selection import train_test_split
-from starter.ml.model import train_model, inference
+from starter.ml.model import train_model, inference, compute_model_metrics
 from starter.ml.data import process_data
 from sklearn.externals import joblib
 from sklearn.metrics import mean_absolute_error
@@ -41,19 +41,19 @@ X_test, y_test, encoder, lb = process_data(
 )
 
 # Train and save a model.
-with open('../model/lb.pkl', 'wb') as f:
+with open(os.path.join(ROOT_DIR, "starter", "model", "lb.pkl"), 'wb') as f:
     pickle.dump(lb, f)
-with open('../model/lb.pkl', 'wb') as f:
+with open(os.path.join(ROOT_DIR, "starter", "model", "encoder.pkl"), 'wb') as f:
     pickle.dump(encoder, f)
 
 # Train and save a model.
 logger.info("Train model")
 rf_model = train_model(X_train, y_train)
 logger.info("Save model")
-with open('../model/rf_model.pkl', 'wb') as file:
+with open(os.path.join(ROOT_DIR, "starter", "model", "rf_model.pkl"), 'wb') as file:
     pickle.dump(rf_model, file)
 
-y_pred = inference(rf_model, X_train)
+y_pred = inference(rf_model, X_test)
 
 # Compute r2 and MAE
 logger.info("Scoring")
@@ -65,4 +65,7 @@ mae = mean_absolute_error(y_test, y_pred)
 logger.info(f"Score: {r_squared}")
 logger.info(f"MAE: {mae}")
 
-logger.info("Exporting model")
+precision, recall, fbeta = compute_model_metrics(y_test, y_pred)
+logger.info(f"precision: {precision}")
+logger.info(f"recall: {recall}")
+logger.info(f"fbeta: {fbeta}")

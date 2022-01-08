@@ -39,3 +39,7 @@ jobs:
       run: |
         dvc remote add -d s3-bucket s3://euriskoudacityproject3
         dvc pull
+    - name: Run unit tests
+      run: |
+        pytest
+      
