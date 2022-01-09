@@ -48,8 +48,6 @@ def test_train_model(load_data):
     )
 
     rf_model = train_model(X_train, y_train)
-    with open(os.path.join(os.getcwd(), "starter", "model", "unit_test_rf_model.pkl"), 'wb') as file:
-        pickle.dump(rf_model, file)
     
     try:
         rf_model.predict(X_test)
