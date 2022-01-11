@@ -1,5 +1,6 @@
 from sklearn.metrics import fbeta_score, precision_score, recall_score
 from sklearn.ensemble import RandomForestRegressor
+from sklearn.linear_model import LogisticRegression
 import logging
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)-15s %(message)s")
@@ -34,7 +35,10 @@ def train_model(X_train, y_train):
     logger.info("Fitting")
     rf_pipe.fit(X_train,y_train)
 
-    return rf_pipe
+    lr_pipe = LogisticRegression()
+    lr_pipe.fit(X_train, y_train)
+
+    return rf_pipe, lr_pipe
 
 
 def compute_model_metrics(y, preds):
@@ -75,3 +79,9 @@ def inference(model, X):
     """
     preds = model.predict(X)
     return preds
+
+def slice_performance(model, data):
+
+
+
+    return 0
