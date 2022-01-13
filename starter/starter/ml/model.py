@@ -102,12 +102,12 @@ def slice_performance(model, data, encoder, lb, save_path):
     cat_features = [
         "workclass",
         "education",
-        "marital-status",
+        "marital_status",
         "occupation",
         "relationship",
         "race",
         "sex",
-        "native-country",
+        "native_country",
     ]
     slice_performance = []
     for category in cat_features:
