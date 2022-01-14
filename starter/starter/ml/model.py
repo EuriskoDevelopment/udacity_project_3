@@ -1,5 +1,5 @@
 from sklearn.metrics import fbeta_score, precision_score, recall_score
-from sklearn.ensemble import RandomForestRegressor
+from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
 from sklearn.linear_model import LogisticRegression
 from starter.starter.ml.data import process_data
 import csv
@@ -33,7 +33,7 @@ def train_model(X_train, y_train):
     #            "criterion": "mae",
     #            "max_features": 0.5,
     #            "oob_score": True}
-    rf_pipe = RandomForestRegressor()
+    rf_pipe = RandomForestClassifier()
     logger.info("Fitting")
     rf_pipe.fit(X_train,y_train)
 

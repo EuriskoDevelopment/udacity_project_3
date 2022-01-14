@@ -3,7 +3,7 @@ import os
 import pandas as pd
 import pickle
 import logging
-
+print(os.getcwd())
 from sklearn import linear_model
 from starter.starter.ml.model import train_model, inference, compute_model_metrics, slice_performance
 from sklearn.metrics import mean_absolute_error
@@ -49,16 +49,19 @@ with open(os.path.join(os.getcwd(), "starter", "model", "encoder.pkl"), 'wb') as
 
 # Train and save a model.
 logger.info("Train model")
-_, lr_model = train_model(X_train, y_train)
+rf_model, lr_model = train_model(X_train, y_train)
 logger.info("Save model")
 with open(os.path.join(os.getcwd(), "starter", "model", "lr_model.pkl"), 'wb') as file:
     pickle.dump(lr_model, file)
+with open(os.path.join(os.getcwd(), "starter", "model", "rf_model.pkl"), 'wb') as file:
+    pickle.dump(rf_model, file)
 
-y_pred = inference(lr_model, X_test)
+y_pred = inference(rf_model, X_test)
 
+print(y_pred)
 # Compute r2 and MAE
 logger.info("Scoring")
-r_squared = lr_model.score(X_test, y_test)
+r_squared = rf_model.score(X_test, y_test)
 
 #y_pred = rf_model.predict(X_test)
 mae = mean_absolute_error(y_test, y_pred)
@@ -66,9 +69,9 @@ mae = mean_absolute_error(y_test, y_pred)
 logger.info(f"Score: {r_squared}")
 logger.info(f"MAE: {mae}")
 
-#precision, recall, fbeta = compute_model_metrics(y_test, y_pred)
-#logger.info(f"precision: {precision}")
-#logger.info(f"recall: {recall}")
-#logger.info(f"fbeta: {fbeta}")
+precision, recall, fbeta = compute_model_metrics(y_test, y_pred)
+logger.info(f"precision: {precision}")
+logger.info(f"recall: {recall}")
+logger.info(f"fbeta: {fbeta}")
 
-slice_performance(lr_model, data, encoder, lb, os.path.join(os.getcwd(), "starter", "model", "slice_performance.csv"))
+slice_performance(rf_model, data, encoder, lb, os.path.join(os.getcwd(), "starter", "model", "slice_performance_rf.csv"))
