@@ -43,7 +43,7 @@ async def get_root():
     return {"Welcome to this machine learning app to predict wether someone is making above 50K in salary"}
 
 # This allows sending of data (our TaggedItem) via POST to the API.
-@app.post("/inference/")
+@app.post("/inference")
 async def model_inference(attributes: Attributes):
 
     model = pickle.load(open(os.path.join(os.getcwd(), "starter", "model", "rf_model.pkl"), 'rb'))
@@ -72,7 +72,11 @@ async def model_inference(attributes: Attributes):
     )
 
     preds = inference(model, X)
-    return {"Salary greater than 50K": int(preds[0])}
+    is_greater_than_50k = int(preds[0])
+    if is_greater_than_50k:
+        return {"Predicted salary, based on input attributes, is greater than 50K"}
+    else:
+        return {"Predicted salary, based on input attributes, is less than 50K"}
 
 @app.get("/items/{item_id}")
 async def get_items(item_id: int, count: int = 1):

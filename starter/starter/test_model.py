@@ -4,8 +4,8 @@ import pandas as pd
 import pickle
 #from starter.utils import ROOT_DIR
 from sklearn.model_selection import train_test_split
-from starter.ml.model import train_model, inference, compute_model_metrics
-from starter.ml.data import process_data
+from starter.starter.ml.model import train_model, inference, compute_model_metrics
+from starter.starter.ml.data import process_data
 from sklearn.exceptions import NotFittedError
 from numpy import dtype
 import numpy as np
@@ -18,7 +18,7 @@ def load_data():
 
 @pytest.fixture(scope='session')
 def load_model():
-    model = pickle.load(open(os.path.join(os.getcwd(), "starter", "model", "unit_test_rf_model.pkl"), 'rb'))
+    model = pickle.load(open(os.path.join(os.getcwd(), "starter", "model", "unit_test_lr_model.pkl"), 'rb'))
     return model
 
 
@@ -47,10 +47,10 @@ def test_train_model(load_data):
         test, categorical_features=cat_features, label="salary", training=False, encoder=encoder, lb=lb
     )
 
-    rf_model = train_model(X_train, y_train)
+    _, lr_model = train_model(X_train, y_train)
     
     try:
-        rf_model.predict(X_test)
+        lr_model.predict(X_test)
     except NotFittedError as e:
         print(repr(e))
     
@@ -68,7 +68,7 @@ def test_computer_model_metrics():
 
 def test_save_load(load_data, load_model):
     assert 1 == 1
-    rf_model = load_model
+    model = load_model
     data = load_data
 
     train, test = train_test_split(data, test_size=0.20)
@@ -94,7 +94,7 @@ def test_save_load(load_data, load_model):
     )
     
     try:
-        rf_model.predict(X_test)
+        model.predict(X_test)
     except NotFittedError as e:
         print(repr(e))
 

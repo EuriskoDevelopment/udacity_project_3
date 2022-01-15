@@ -9,10 +9,15 @@ from main import app
 client = TestClient(app)
 
 
+def test_get_malformed():
+    r = client.get("/invalid_addr")
+    assert r.status_code != 200
+
+
 def test_get_root():
     response = client.get("/")
     assert response.status_code == 200
-    assert response.json().dtype == dtype.str 
+    assert response.json() == ["Welcome to this machine learning app to predict wether someone is making above 50K in salary"]
 
 
 def test_inference_above_50k():
@@ -32,6 +37,28 @@ def test_inference_above_50k():
     "hours_per_week": 60,
     "native_country": "United-States"
     }
-    response = client.post("/items", json=attributes)
+    response = client.post("/inference", json=attributes)
     assert response.status_code == 200
-    assert "Salary greater than" in response.json() 
+    assert response.json() == ["Predicted salary, based on input attributes, is greater than 50K"]
+
+
+def test_inference_less_than_50k():
+    attributes = {
+    "age": 21,
+    "workclass": "Private",
+    "fnlgt": 101509,
+    "education": "Some-college",
+    "education_num": 3,
+    "marital_status": "Married-civ-spouse",
+    "occupation": "Other-services",
+    "relationship": "Husband",
+    "race": "White",
+    "sex": "Male",
+    "capital_gain": 0,
+    "capital_loss": 50,
+    "hours_per_week": 10,
+    "native_country": "United-States"
+    }
+    response = client.post("/inference", json=attributes)
+    assert response.status_code == 200
+    assert response.json() == ["Predicted salary, based on input attributes, is less than 50K"]
