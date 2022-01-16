@@ -13,8 +13,6 @@ import csv
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)-15s %(message)s")
 logger = logging.getLogger()
-# Add code to load in the data.
-
 
 path_to_data = os.path.join(os.getcwd(), "data","clean_data.csv")
 data = pd.read_csv(path_to_data)
