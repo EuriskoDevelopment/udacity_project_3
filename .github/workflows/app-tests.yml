@@ -29,9 +29,9 @@ jobs:
       uses: aws-actions/configure-aws-credentials@v1
       with:
         # TODO(roberi): Check https://github.com/marketplace/actions/configure-aws-credentials-action-for-github-actions
-        aws-access-key-id: ASIATZFWYYDCRL7LHDVA
-        aws-secret-access-key: M8g0fS113UeI3jsBxKbhyiGeY3uL1KitS1S5XM/H
-        aws-session-token: FwoGZXIvYXdzEKX//////////wEaDMFwdhSse1VTPSE9kCK7Ab4CgQ0THxHYs/eelQRzh8w9PL7TRHax4bYbIxkYeyaFZLlw6lN6eLry0aHF9/d//BCC0bCIijQHTCBWQWJDgtwW1hp3fEAmKwdZVYem6RTunVtoBOkUlP1RUl3yOc7tdb0s2HbaIgsjDqQ1B0EIt8OxJpRFnD/AppRQDqhj0HRFQEJ7TyO0XsFvtFjRizbb64Ggn8xgJo6/FV2Q46jGfcvyw1iYlTXJ2hJOZuOfJNaPH6M4hit3c2C9w48oseSRjwYyLXnn8tPYmdVA+D8IWgGyjsMBfOagJgveWoDrG8Szz3kAZLVskaSKhL8UJsnc9w==
+        aws-access-key-id: ASIATZFWYYDCY3QVE55U
+        aws-secret-access-key: vYHKwlJeLNtFpZmvSraYc34yvWOG72GaMElZbFpP
+        aws-session-token: FwoGZXIvYXdzEKf//////////wEaDP7uTfMbX+B+ky+hEyK7Aebg86YDKiNdwTZS85cGr9AkR1ohacrl+NI27545W470rFpKOLNpyNZ8br8UqJvlq/1eB+P+HKrQjhFuFfUXEyIxUH261KMsp4t2qzc87MowgAlYMe1J/cdYWmUwEEL1+k2yXuitfFIlhwwYznY7gO6XHRz7eo6STNjCPkj58UQoDxdmyqrrZzhtcE9YRe8wjixyR4ml8UM1c79kXwY1PUmm9IkSTlyBpwBCQnK/rmcPykD3UBvEl5MHAdUo/6OSjwYyLUowtoKXsNiyCHQ/VjwfRScZcOBQNAuUNEFEvyTxa17sGwuVZfcw6SI7J/wYkw==
         aws-region: eu-north-1
     - name: Setup DVC
       uses: iterative/setup-dvc@v1
