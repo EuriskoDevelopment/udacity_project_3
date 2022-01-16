@@ -23,12 +23,6 @@ if "DYNO" in os.environ and os.path.isdir(".dvc"):
 
 app = FastAPI()
 
-# Declare the data object with its components and their type.
-class TaggedItem(BaseModel):
-    name: str
-    tags: Union[str, list] 
-    item_id: int
-
 class Attributes(BaseModel):
     age : int
     workclass : str
