@@ -43,7 +43,6 @@ class Attributes(BaseModel):
     native_country : str
 
 
-
 @app.get("/")
 async def get_root():
     return {"Welcome to this machine learning app to predict wether someone is making above 50K in salary"}
