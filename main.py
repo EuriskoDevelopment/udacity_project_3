@@ -23,7 +23,7 @@ if "DYNO" in os.environ and os.path.isdir(".dvc"):
     print(dvc_output.stdout)
     print(dvc_output.stderr)
     if dvc_output.returncode != 0:
-        print("dvc pull failed")
+        exit("dvc pull failed")
     os.system("rm -r .dvc .apt/usr/lib/dvc")
 
 
