@@ -1,6 +1,4 @@
 [core]
     remote = s3-bucket
-    autostage = true
 ['remote "s3-bucket"']
     url = s3://euriskoudacityproject3
-    profile = default
