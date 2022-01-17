@@ -16,7 +16,7 @@ import subprocess
 
 if "DYNO" in os.environ and os.path.isdir(".dvc"):
     os.system("dvc config core.no_scm true")
-    #os.system("dvc remote add -df s3-bucket s3://euriskoudacityproject3")
+    os.system("dvc remote add -df s3-bucket s3://euriskoudacityproject3")
     print("AWS set up")
     dvc_output = subprocess.run(
     ["dvc", "pull"], capture_output=True, text=True)
