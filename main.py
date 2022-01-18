@@ -16,25 +16,26 @@ if "DYNO" in os.environ and os.path.isdir(".dvc"):
 app = FastAPI()
 
 class Attributes(BaseModel):
-    age : int
-    workclass : str
-    fnlgt : int
-    education : str
-    education_num : int
-    marital_status : str
-    occupation : str
-    relationship : str
-    race : str
-    sex : str
-    capital_gain : int
-    capital_loss : int
-    hours_per_week : int
-    native_country : str
+    age: int
+    workclass: str
+    fnlgt: int
+    education: str
+    education_num: int
+    marital_status: str
+    occupation: str
+    relationship: str
+    race: str
+    sex: str
+    capital_gain: int
+    capital_loss: int
+    hours_per_week: int
+    native_country: str
 
 
 @app.get("/")
 async def get_root():
     return {"Welcome to this machine learning app to predict wether someone is making above 50K in salary"}
+
 
 @app.post("/inference")
 async def model_inference(attributes: Attributes):
@@ -56,7 +57,7 @@ async def model_inference(attributes: Attributes):
         "sex",
         "native_country",
     ]
-    
+
     X, _, _, _ = process_data(
         data, categorical_features=cat_features, training=False, encoder=encoder, lb=lb
     )
@@ -67,6 +68,7 @@ async def model_inference(attributes: Attributes):
         return {"Predicted salary, based on input attributes, is greater than 50K"}
     else:
         return {"Predicted salary, based on input attributes, is less than 50K"}
+
 
 @app.get("/items/{item_id}")
 async def get_items(item_id: int, count: int = 1):
