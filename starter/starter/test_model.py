@@ -18,7 +18,7 @@ def load_data():
 
 @pytest.fixture(scope='session')
 def load_model():
-    model = pickle.load(open(os.path.join(os.getcwd(), "starter", "model", "unit_test_rf_model.pkl"), 'rb'))
+    model = pickle.load(open(os.path.join(os.getcwd(), "starter", "model", "unit_test_lr_model.pkl"), 'rb'))
     return model
 
 
