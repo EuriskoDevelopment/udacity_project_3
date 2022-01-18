@@ -4,6 +4,7 @@ Working in a command line environment is recommended for ease of use with git an
 * Run this script to test POST request on Heroku App:
 python -m request_post
 * Pytests can be found /starter/test_api, /starter/starter/test_model.py
+* Run train model" python -m starter.starter.train_model
 
 
 

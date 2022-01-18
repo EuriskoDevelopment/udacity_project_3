@@ -45,8 +45,6 @@ with open(os.path.join(os.getcwd(), "starter", "model", "encoder.pkl"), 'wb') as
 logger.info("Train model")
 rf_model, lr_model = train_model(X_train, y_train)
 logger.info("Save model")
-with open(os.path.join(os.getcwd(), "starter", "model", "lr_model.pkl"), 'wb') as file:
-    pickle.dump(lr_model, file)
 with open(os.path.join(os.getcwd(), "starter", "model", "rf_model.pkl"), 'wb') as file:
     pickle.dump(rf_model, file)
 
