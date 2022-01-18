@@ -29,10 +29,10 @@ jobs:
       uses: aws-actions/configure-aws-credentials@v1
       with:
         # TODO(roberi): Check https://github.com/marketplace/actions/configure-aws-credentials-action-for-github-actions
-        aws-access-key-id: AKIATZFWYYDCVDXAEH4K
-        aws-secret-access-key: 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
+        aws-access-key-id: AKIATZFWYYDCWD7NC7VB
+        aws-secret-access-key: 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
         #aws-session-token: FwoGZXIvYXdzEL///////////wEaDOCD7CaAfXuIyQtH/CK7AW/gCXWrNfDoCnlWYE6rJmod9R3Imw+b5U58KBL+XEFUxdhUAmCl/TAJK+rldUZNngkiyZHD2oYhC5VPFTC/vpRc4aQmDKZT15V1RPfZuC7OeuJICByvfW60QvNAvChNXDw0vSO0LPUoX6oQyjM5mK8axdjdNzQFwH4bkwAG4ngbfHpo0JynVctap+Xg5L37T+2DYZkQbgSPtzg1XTcGPX/+bGbIZTVuDwGB7wAMOyAUF/lKlNwxdhEBYq4onMGXjwYyLXKikTyhqXpFjkn5ITSTVwblL0uIHENaqQSU7axjt3+g+FM7xxI+XuNtarxkgA==
-        aws-region: eu-north-1
+        aws-region: us-east-1
     - name: Setup DVC
       uses: iterative/setup-dvc@v1
     - name: Pull data from DVC
