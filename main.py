@@ -1,33 +1,17 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-
-from typing import Union 
-from pydantic import BaseModel
-
 from starter.starter.ml.model import inference
 import pickle
-#from starter.utils import ROOT_DIR
-from sklearn.model_selection import train_test_split
 from starter.starter.ml.data import process_data
 import pandas as pd
 import os
-import subprocess
 
 
 if "DYNO" in os.environ and os.path.isdir(".dvc"):
     os.system("dvc config core.no_scm true")
-    #os.system("dvc remote add -df s3-bucket s3://euriskoudacityproject4")
-    print("AWS set up")
-    dvc_output = subprocess.run(
-    ["dvc", "pull"], capture_output=True, text=True)
-    print(dvc_output.stdout)
-    print(dvc_output.stderr)
-    
-    print("Trying dvc pull")
-    if dvc_output.returncode != 0:
+    if os.system("dvc pull") != 0:
         exit("dvc pull failed")
     os.system("rm -r .dvc .apt/usr/lib/dvc")
-
 
 app = FastAPI()
 
@@ -52,7 +36,6 @@ class Attributes(BaseModel):
 async def get_root():
     return {"Welcome to this machine learning app to predict wether someone is making above 50K in salary"}
 
-# This allows sending of data (our TaggedItem) via POST to the API.
 @app.post("/inference")
 async def model_inference(attributes: Attributes):
 
@@ -62,9 +45,6 @@ async def model_inference(attributes: Attributes):
 
     attributes_dict = attributes.dict(by_alias=True)
     data = pd.DataFrame(attributes_dict, index=[0])
-
-    #path_to_data = os.path.join(os.getcwd(), "data","clean_data.csv")
-    #data = pd.read_csv(path_to_data)
 
     cat_features = [
         "workclass",

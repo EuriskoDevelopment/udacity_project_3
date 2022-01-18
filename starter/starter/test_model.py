@@ -2,7 +2,6 @@ import pytest
 import os
 import pandas as pd
 import pickle
-#from starter.utils import ROOT_DIR
 from sklearn.model_selection import train_test_split
 from starter.starter.ml.model import train_model, inference, compute_model_metrics
 from starter.starter.ml.data import process_data
@@ -42,7 +41,6 @@ def test_train_model(load_data):
         train, categorical_features=cat_features, label="salary", training=True
     )
 
-    # Proces the test data with the process_data function.
     X_test, y_test, encoder, lb = process_data(
         test, categorical_features=cat_features, label="salary", training=False, encoder=encoder, lb=lb
     )
@@ -88,7 +86,6 @@ def test_save_load(load_data, load_model):
         train, categorical_features=cat_features, label="salary", training=True
     )
 
-    # Proces the test data with the process_data function.
     X_test, y_test, encoder, lb = process_data(
         test, categorical_features=cat_features, label="salary", training=False, encoder=encoder, lb=lb
     )
