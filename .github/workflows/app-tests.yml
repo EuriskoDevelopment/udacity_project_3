@@ -37,7 +37,7 @@ jobs:
       uses: iterative/setup-dvc@v1
     - name: Pull data from DVC
       run: |
-        dvc remote add -df s3-bucket s3://euriskoudacityproject3
+        dvc remote add -df s3-bucket s3://euriskoudacityproject4
         dvc pull
     - name: Run unit tests
       run: |
