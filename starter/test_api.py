@@ -1,9 +1,7 @@
 from fastapi.testclient import TestClient
 from main import app
-from numpy import dtype, reshape
 from fastapi.testclient import TestClient
 import pytest
-
 from main import app
 
 client = TestClient(app)
@@ -22,20 +20,20 @@ def test_get_root():
 
 def test_inference_above_50k():
     attributes = {
-    "age": 45,
-    "workclass": "Private",
-    "fnlgt": 280464,
-    "education": "Doctorate",
-    "education_num": 10,
-    "marital_status": "Married-civ-spouse",
-    "occupation": "Exec-managerial",
-    "relationship": "Husband",
-    "race": "White",
-    "sex": "Male",
-    "capital_gain": 510,
-    "capital_loss": 0,
-    "hours_per_week": 60,
-    "native_country": "United-States"
+        "age": 45,
+        "workclass": "Private",
+        "fnlgt": 280464,
+        "education": "Doctorate",
+        "education_num": 10,
+        "marital_status": "Married-civ-spouse",
+        "occupation": "Exec-managerial",
+        "relationship": "Husband",
+        "race": "White",
+        "sex": "Male",
+        "capital_gain": 510,
+        "capital_loss": 0,
+        "hours_per_week": 60,
+        "native_country": "United-States"
     }
     response = client.post("/inference", json=attributes)
     assert response.status_code == 200
@@ -44,20 +42,20 @@ def test_inference_above_50k():
 
 def test_inference_less_than_50k():
     attributes = {
-    "age": 21,
-    "workclass": "Private",
-    "fnlgt": 101509,
-    "education": "Some-college",
-    "education_num": 3,
-    "marital_status": "Married-civ-spouse",
-    "occupation": "Other-services",
-    "relationship": "Husband",
-    "race": "White",
-    "sex": "Male",
-    "capital_gain": 0,
-    "capital_loss": 50,
-    "hours_per_week": 10,
-    "native_country": "United-States"
+        "age": 21,
+        "workclass": "Private",
+        "fnlgt": 101509,
+        "education": "Some-college",
+        "education_num": 3,
+        "marital_status": "Married-civ-spouse",
+        "occupation": "Other-services",
+        "relationship": "Husband",
+        "race": "White",
+        "sex": "Male",
+        "capital_gain": 0,
+        "capital_loss": 50,
+        "hours_per_week": 10,
+        "native_country": "United-States"
     }
     response = client.post("/inference", json=attributes)
     assert response.status_code == 200

@@ -5,6 +5,7 @@ Working in a command line environment is recommended for ease of use with git an
 python -m request_post
 * Pytests can be found /starter/test_api, /starter/starter/test_model.py
 * Run train model" python -m starter.starter.train_model
+* Slice performance can be found here: starter/model/slice_performance_rf.csv
 
 
 

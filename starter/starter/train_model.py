@@ -12,7 +12,7 @@ from starter.starter.ml.data import process_data
 logging.basicConfig(level=logging.INFO, format="%(asctime)-15s %(message)s")
 logger = logging.getLogger()
 
-path_to_data = os.path.join(os.getcwd(), "data","clean_data.csv")
+path_to_data = os.path.join(os.getcwd(), "data", "clean_data.csv")
 data = pd.read_csv(path_to_data)
 
 # Optional enhancement, use K-fold cross validation instead of a train-test split.

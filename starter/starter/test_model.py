@@ -3,21 +3,23 @@ import os
 import pandas as pd
 import pickle
 from sklearn.model_selection import train_test_split
-from starter.starter.ml.model import train_model, inference, compute_model_metrics
+from starter.starter.ml.model import train_model, compute_model_metrics
 from starter.starter.ml.data import process_data
 from sklearn.exceptions import NotFittedError
 from numpy import dtype
 import numpy as np
 
+
 @pytest.fixture(scope='session')
 def load_data():
-    path_to_data = os.path.join(os.getcwd(), "data","clean_data.csv")
+    path_to_data = os.path.join(os.getcwd(), "data", "clean_data.csv")
     data = pd.read_csv(path_to_data)
     return data
 
+
 @pytest.fixture(scope='session')
 def load_model():
-    model = pickle.load(open(os.path.join(os.getcwd(), "starter", "model", "unit_test_lr_model.pkl"), 'rb'))
+    model = pickle.load(open(os.path.join(os.getcwd(), "starter", "model", "unit_test_rf_model.pkl"), 'rb'))
     return model
 
 
@@ -46,12 +48,11 @@ def test_train_model(load_data):
     )
 
     _, lr_model = train_model(X_train, y_train)
-    
+
     try:
         lr_model.predict(X_test)
     except NotFittedError as e:
         print(repr(e))
-    
 
 
 def test_computer_model_metrics():
@@ -64,7 +65,7 @@ def test_computer_model_metrics():
     assert fbeta.dtype == dtype('float64')
 
 
-def test_save_load(load_data, load_model):
+def test_load_model(load_data, load_model):
     assert 1 == 1
     model = load_model
     data = load_data
@@ -89,9 +90,8 @@ def test_save_load(load_data, load_model):
     X_test, y_test, encoder, lb = process_data(
         test, categorical_features=cat_features, label="salary", training=False, encoder=encoder, lb=lb
     )
-    
+
     try:
         model.predict(X_test)
     except NotFittedError as e:
         print(repr(e))
-
