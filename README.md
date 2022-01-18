@@ -1,11 +1,13 @@
 Working in a command line environment is recommended for ease of use with git and dvc. If on Windows, WSL1 or 2 is recommended.
 
 # Not to reviewers
-* Run this script to test POST request on Heroku App:
-python -m request_post
-* Pytests can be found /starter/test_api, /starter/starter/test_model.py
-* Run train model" python -m starter.starter.train_model
-* Slice performance can be found here: starter/model/slice_performance_rf.csv
+* Pytests can be found `/starter/test_api.py` and `/starter/starter/test_model.py`
+* DVC dag can be found in project root called `DVC_dag.png`
+* Model card can be found in project root called `model_card.md`
+* Train the model with `python -m starter.starter.train_model`
+* Slice performance can be found here: `starter/model/slice_performance_rf.csv`
+* Heruko URL: `https://eurisko-development-project3.herokuapp.com/`
+* Run this script to test POST request on Heroku App: `python -m request_post`
 
 
 

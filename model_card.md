@@ -35,7 +35,12 @@ Data can be found here [Census Income data set](https://archive.ics.uci.edu/ml/d
 20 % of the data is used for evaluation.
 
 ## Metrics
-_Please include the metrics used and your model's performance on those metrics._
+Score: 0.8585905112851221
+MAE: 0.14140948871487793
+precision: 0.7425018288222385
+recall: 0.6407828282828283
+fbeta: 0.6879024059640799
+
 
 ## Ethical Considerations
 
