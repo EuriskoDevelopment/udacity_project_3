@@ -18,7 +18,7 @@ def test_get_root():
     assert response.json() == ["Welcome to this machine learning app to predict wether someone is making above 50K in salary"]
 
 
-def test_inference_above_50k():
+def test_api_inference_above_50k():
     attributes = {
         "age": 45,
         "workclass": "Private",
@@ -40,7 +40,7 @@ def test_inference_above_50k():
     assert response.json() == ["Predicted salary, based on input attributes, is greater than 50K"]
 
 
-def test_inference_less_than_50k():
+def test_api_inference_less_than_50k():
     attributes = {
         "age": 21,
         "workclass": "Private",
