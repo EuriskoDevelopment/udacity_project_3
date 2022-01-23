@@ -59,17 +59,7 @@ def test_train_model_gives_binary_predictions(load_data):
     assert np.all((pred == 0)|(pred == 1))
 
 
-def test_computer_model_metrics():
-    assert 1 == 1
-    preds = np.full((10, 1), 1)
-    y = np.full((10, 1), 0)
-    precision, recall, fbeta = compute_model_metrics(y, preds)
-    assert precision.dtype == dtype('float64')
-    assert recall.dtype == dtype('float64')
-    assert fbeta.dtype == dtype('float64')
-
-
-def test_model_inference_above_than_50k(load_model_and_encoder):
+def test_model_inference_type(load_model_and_encoder):
     model, encoder, lb = load_model_and_encoder
     
     attributes = {
@@ -107,31 +97,21 @@ def test_model_inference_above_than_50k(load_model_and_encoder):
     )
 
     preds = inference(model, X)
-    is_greater_than_50k = int(preds[0])
-    assert is_greater_than_50k
+    assert preds.dtype == dtype('int64')
 
 
-def test_model_inference_less_than_50k(load_model_and_encoder):
-    model, encoder, lb = load_model_and_encoder
-    
-    attributes = {
-        "age": 21,
-        "workclass": "Private",
-        "fnlgt": 101509,
-        "education": "Some-college",
-        "education_num": 3,
-        "marital_status": "Married-civ-spouse",
-        "occupation": "Other-services",
-        "relationship": "Husband",
-        "race": "White",
-        "sex": "Male",
-        "capital_gain": 0,
-        "capital_loss": 50,
-        "hours_per_week": 10,
-        "native_country": "United-States"
-    }
-    
-    data = pd.DataFrame(attributes, index=[0])
+def test_computer_model_metrics():
+    assert 1 == 1
+    preds = np.full((10, 1), 1)
+    y = np.full((10, 1), 0)
+    precision, recall, fbeta = compute_model_metrics(y, preds)
+    assert precision.dtype == dtype('float64')
+    assert recall.dtype == dtype('float64')
+    assert fbeta.dtype == dtype('float64')
+
+
+def test_process_data(load_data):
+    data = load_data
 
     cat_features = [
         "workclass",
@@ -144,10 +124,8 @@ def test_model_inference_less_than_50k(load_model_and_encoder):
         "native_country",
     ]
 
-    X, _, _, _ = process_data(
-        data, categorical_features=cat_features, training=False, encoder=encoder, lb=lb
+    X_train, y_train, _, _ = process_data(
+        data, categorical_features=cat_features, label="salary", training=True
     )
 
-    preds = inference(model, X)
-    is_greater_than_50k = int(preds[0])
-    assert is_greater_than_50k == 0
+    assert len(X_train) == len(y_train)
